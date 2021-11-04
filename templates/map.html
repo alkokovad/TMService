@@ -1,36 +1,36 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>TMService</title>
+    <title>Быстрый старт. Размещение интерактивной карты на странице</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU;apikey=37187043-dffd-4642-9854-1205c5faa9bc" type="text/javascript"></script>
+    <script src="https://api-maps.yandex.ru/2.1/?apikey=ваш API-ключ&lang=ru_RU" type="text/javascript">
+    </script>
     <script type="text/javascript">
         ymaps.ready(init);
-
-        function init () {
+        function init(){
             var myMap = new ymaps.Map("map", {
-            center: [54.83, 37.11],
-            zoom: 7
-        }, {
-                searchControlProvider: 'yandex#search'
-        }),
-        myPlacemark = new ymaps.Placemark([9.9436615, 77.8978759], {
-            balloonContentHeader: "Выплывающее окно метки",
-            balloonContentBody: "Содержимое <em>окна</em> метки",
-            balloonContentFooter: "Коммент",
-            hintContent: "Еще чето метки"
-        });
+                center: [55.76, 37.64],
+                zoom: 7
+            });
 
-    myMap.geoObjects.add(myPlacemark);
-    }
+            var myPlacemark = new ymaps.Placemark([55.8, 37.6], {}, {draggable: true});
+            myPlacemark.events.add('dragend', function(e) {
+            var thisPlacemark = e.get('target');
+            var problemName = "Название проблемы";
+            thisPlacemark.properties.set('balloonContent', problemName);
+            });
+            myMap.geoObjects.add(myPlacemark);
+        }
     </script>
-	<style>
+    <style>
         html, body, #map {
-            width: 100%; height: 100%; padding: 0; margin: 0; object-fit: fill;
+            width: 100%; height: 100%; padding: 0; margin: 0;
         }
     </style>
 </head>
+
 <body>
-<div id="map"></div>
+    <div id="map"></div>
 </body>
+
 </html>
