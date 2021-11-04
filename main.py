@@ -1,6 +1,6 @@
 from flask import Flask, render_template
 from werkzeug.utils import redirect
-
+from data.users import User
 from data import db_session
 from forms.registration_form import RegisterForm
 
@@ -45,7 +45,7 @@ def reqister():
         user.set_password(form.password.data)
         db_sess.add(user)
         db_sess.commit()
-        return redirect('/login')
+        return redirect('/main')
     return render_template('register.html', title='Регистрация', form=form)
 
 
