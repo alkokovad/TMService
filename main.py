@@ -49,5 +49,10 @@ def reqister():
     return render_template('register.html', title='Регистрация', form=form)
 
 
+@app.route('/main_page')
+def main_page():
+    return render_template('base.html')
+
+
 if __name__ == '__main__':
     main()
