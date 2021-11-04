@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>TMService</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU;apikey=37187043-dffd-4642-9854-1205c5faa9bc" type="text/javascript"></script>
+    <script type="text/javascript">
+        ymaps.ready(init);
+
+        function init () {
+            var myMap = new ymaps.Map("map", {
+            center: [54.83, 37.11],
+            zoom: 7
+        }, {
+                searchControlProvider: 'yandex#search'
+        }),
+        myPlacemark = new ymaps.Placemark([9.9436615, 77.8978759], {
+            balloonContentHeader: "Выплывающее окно метки",
+            balloonContentBody: "Содержимое <em>окна</em> метки",
+            balloonContentFooter: "Коммент",
+            hintContent: "Еще чето метки"
+        });
+
+    myMap.geoObjects.add(myPlacemark);
+    }
+    </script>
+	<style>
+        html, body, #map {
+            width: 100%; height: 100%; padding: 0; margin: 0; object-fit: fill;
+        }
+    </style>
+</head>
+<body>
+<div id="map"></div>
+</body>
+</html>
