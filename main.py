@@ -5,6 +5,7 @@ from data import db_session
 from forms.registration_form import RegisterForm
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = '123'
 
 
 def main():
