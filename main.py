@@ -9,7 +9,7 @@ app = Flask(__name__)
 
 def main():
     db_session.global_init("db/usersandproblems.db")
-    app.run(host='localhost', port=5000)
+    app.run(host='localhost', port=5001)
 
     def __repr__(self):
         return ' '.join([self.__class__.__main__,
