@@ -1,36 +1,78 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 <head>
-    <title>Быстрый старт. Размещение интерактивной карты на странице</title>
+    <title>TMService</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <script src="https://api-maps.yandex.ru/2.1/?apikey=37187043-dffd-4642-9854-1205c5faa9bc&lang=ru_RU" type="text/javascript">
-    </script>
+    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=<ваш API-ключ>" type="text/javascript"></script>
     <script type="text/javascript">
-        ymaps.ready(init);
-        function init(){
-            var myMap = new ymaps.Map("map", {
-                center: [55.76, 37.64],
-                zoom: 7
-            });
+        ymaps.ready(function () {
+    var myMap = new ymaps.Map('map', {
+            center: [55.751574, 37.573856],
+            zoom: 9,
+            controls: []
+        }, {
+            searchControlProvider: 'yandex#search'
+        }),
+        clusterer = new ymaps.Clusterer({
+            preset: 'islands#invertedVioletClusterIcons',
+            clusterHideIconOnBalloonOpen: false,
+            geoObjectHideIconOnBalloonOpen: false
+        });
+    clusterer.events
+        .add(['mouseenter', 'mouseleave'], function (e) {
+            var target = e.get('target'),
+                type = e.get('type');
+            if (typeof target.getGeoObjects != 'undefined') {
+                if (type == 'mouseenter') {
+                    target.options.set('preset', 'islands#invertedPinkClusterIcons');
+                } else {
+                    target.options.set('preset', 'islands#invertedVioletClusterIcons');
+                }
+            } else {
+                // Событие произошло на геообъекте.
+                if (type == 'mouseenter') {
+                    target.options.set('preset', 'islands#pinkIcon');
+                } else {
+                    target.options.set('preset', 'islands#violetIcon');
+                }
+            }
+        });
 
-            var myPlacemark = new ymaps.Placemark([55.8, 37.6], {}, {draggable: true});
-            myPlacemark.events.add('dragend', function(e) {
-            var thisPlacemark = e.get('target');
-            var problemName = "Название проблемы";
-            thisPlacemark.properties.set('balloonContent', problemName);
-            });
-            myMap.geoObjects.add(myPlacemark);
-        }
+    var getPointData = function (index) {
+            return {
+                balloonContentBody: 'метка <strong>' + index + '</strong>',
+                clusterCaption: 'метка <strong>' + index + '</strong>'
+            };
+        },
+        getPointOptions = function () {
+            return {
+                preset: 'islands#violetIcon'
+            };
+        },
+        points = [
+         [59.929415, 30.287805], [59.931167, 30.326128], [60.005721, 30.374188]
+        ],
+        geoObjects = [];
+
+    for(var i = 0, len = points.length; i < len; i++) {
+        geoObjects[i] = new ymaps.Placemark(points[i], getPointData(i), getPointOptions());
+    }
+
+    clusterer.add(geoObjects);
+    myMap.geoObjects.add(clusterer);
+
+    myMap.setBounds(clusterer.getBounds(), {
+        checkZoomRange: true
+    });
+});
     </script>
-    <style>
+	<style>
         html, body, #map {
             width: 100%; height: 100%; padding: 0; margin: 0;
         }
     </style>
 </head>
-
 <body>
-    <div id="map"></div>
+<div id="map"></div>
 </body>
-
 </html>
