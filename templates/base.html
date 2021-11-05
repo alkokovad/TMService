@@ -66,7 +66,57 @@ function init () {
             });
         }
     });
+clusterer = new ymaps.Clusterer({
+            preset: 'islands#invertedVioletClusterIcons',
+            clusterHideIconOnBalloonOpen: false,
+            geoObjectHideIconOnBalloonOpen: false
+        });
+    clusterer.events
+        .add(['mouseenter', 'mouseleave'], function (e) {
+            var target = e.get('target'),
+                type = e.get('type');
+            if (typeof target.getGeoObjects != 'undefined') {
+                if (type == 'mouseenter') {
+                    target.options.set('preset', 'islands#invertedPinkClusterIcons');
+                } else {
+                    target.options.set('preset', 'islands#invertedVioletClusterIcons');
+                }
+            } else {
+                // Событие произошло на геообъекте.
+                if (type == 'mouseenter') {
+                    target.options.set('preset', 'islands#pinkIcon');
+                } else {
+                    target.options.set('preset', 'islands#violetIcon');
+                }
+            }
+        });
 
+    var getPointData = function (index) {
+            return {
+                balloonContentBody: 'метка <strong>' + index + '</strong>',
+                clusterCaption: 'метка <strong>' + index + '</strong>'
+            };
+        },
+        getPointOptions = function () {
+            return {
+                preset: 'islands#violetIcon'
+            };
+        },
+        points = [
+         [59.921415, 30.287805], [59.931167, 30.326128], [60.005721, 30.374188]
+        ],
+        geoObjects = [];
+
+    for(var i = 0, len = points.length; i < len; i++) {
+        geoObjects[i] = new ymaps.Placemark(points[i], getPointData(i), getPointOptions());
+    }
+
+    clusterer.add(geoObjects);
+    myMap.geoObjects.add(clusterer);
+
+    myMap.setBounds(clusterer.getBounds(), {
+        checkZoomRange: true
+    });
     myMap.geoObjects.add(myPlacemark);
 }
 
@@ -110,14 +160,13 @@ function init () {
     </style>
 </head>
 <body>
-
-<div class="img__container">
+{% block content %}{% endblock content %}
+<div class="img__container" style="position: relative">
     <img src="static/img/кайф.jpg" class="img-fluid" alt="" ;
          style="filter: brightness(50%); width: 100%">
-    <img class="img_fluid" src="static/img/icon.png" alt="" ;
-         style="position: absolute; top: 3%; left: 1%; index-z: 100">
+    <img class="img_fluid" src="static/img/tmsw.png" alt="" ;
+         style="position: absolute; top: 2%; left: 1%; index-z: 100; width: 3%; height: 8%">
     <h1 class="display-6" style="color: #FFFFFF; position: absolute; top: 4%; left: 5%; index-z: 100">TMService</h1>
-
     <div class="centered">
         <h1 class="display-3" style="color: #FFFFFF">Карта городских проблем</h1>
         <p><a href="#top">
@@ -140,12 +189,42 @@ function init () {
         </a></p>
     </div>
 </div>
-{% block content %}{% endblock content %}
 <p><a name="top"></a></p>
 <div id="map"></div>
-<div class="p-3 mb-2 bg-dark text-white" style="height: 200px; width: 100%"></div>
+<div class="container" style="position: relative; margin: 0; padding: 0; height: 300px; width: 100%">
+    <div class="lefted">
+        <h1 class="display-3" style="color: #000000">О проекте</h1>
+    </div>
+    <h2 class="display-6" style="color: #000000; position: absolute">Наш проект нацелен на решение проблем социального,
+        инфраструктурного, экологического и другого характера</h2>
+</div>
+<div class="p-3 mb-2 bg-dark text-white" style="height: 100px"></div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
         crossorigin="anonymous"></script>
+<script>
+            var section = document.getElementById('section');
+            up.innerHTML = "Click on button to remove the element.";
+
+            function GFG_Fun() {
+                section.parentNode.removeChild(section);
+                down.innerHTML = "Element is removed.";
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
 </body>
 </html>

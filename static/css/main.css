@@ -4,6 +4,10 @@
     left: 50%;
     transform: translate(-50%, -50%);
 }
+.lefted {
+    position: absolute;
+    left: 10%;
+}
 .bg-fon {
     background-color:rgba(0,0,0,.3);
     height:100%;
