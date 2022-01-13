@@ -12,7 +12,7 @@ you see how long city administrations
 are building landscaping for a comfortable 
 life, then you once asked yourself: 
 
-_"How I can help:question: 
+_"How can I help:question: 
 What can I do:question:"._
 
 And Trouble Map Service is the 
@@ -27,7 +27,7 @@ a big organisms, It's alive:seedling:! They also have organs,
 just like us, like a city center, roads, residential 
 areas.
 
-### "And you that will be usefull?" - It might be.
+### "And you think that will be usefull?" - It might be.
 
 :anger:___"Oh, the road here would 
 not interfere with us, otherwise the whole area leaves 
@@ -40,10 +40,9 @@ else will like this point, then someone else, and so on,
 until people in the administration of your city see this 
 point, because it will increase!:sparkles:
 
-_______
-
 # That's about functional?
 So at the begining of our lovely project it'll be a site, but one day I want to see it in application.
+
 __What about working with site?__ At first you see many dots on map (Yo, what?) and there is one that
 is _grey_ colored, it's your's, you can grab it and leave it in any place of map, what's next? So you
 can click on this dot and leave a description of problem or suggestion what you have on this place, 
