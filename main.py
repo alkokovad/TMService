@@ -5,12 +5,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def show_map():
-    return render_template('map.html')
-
-
-@app.route('/onedot/')
-def show_onedot_map():
-    return render_template('mapOneDot.html')
+    return render_template('main.html')
 
 
 if __name__ == '__main__':
