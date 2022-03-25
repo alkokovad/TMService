@@ -46,6 +46,43 @@ body{
     display: inline-block;
 }
 
+.input_line {background: #e3e3e3;}
+.input_line:after {content:""; clear:both; display:table}
+.input_line form {
+  width: 18vw;
+  margin-right: 30px;
+}
+
+.input_line input {
+  width: 18vw;
+  height: 2vw;
+  top: 1vh;
+  left: 1vw;
+  border-radius: 0 1vw 0 1vw;
+  border: 0.15vw solid #7c7c7c;
+  background: #e3e3e3;
+  outline: none;
+  position: absolute;
+  transition: .3s linear;
+}
+.input_line input:focus {
+  width: 18vw;
+}
+.input_line button {
+  width: 42px;
+  height: 42px;
+  background: none;
+  border: none;
+  position: absolute;
+  top: -2px;
+  right: 0;
+}
+.input_line button:before{
+  content: "\f002";
+  font-family: FontAwesome;
+  color: #324b4e;
+}
+
 .menu_section{
     position: absolute;
     height: 100vh;
